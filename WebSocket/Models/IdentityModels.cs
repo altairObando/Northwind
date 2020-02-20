@@ -1,8 +1,11 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+
 
 namespace WebSocket.Models
 {
@@ -29,5 +32,21 @@ namespace WebSocket.Models
         {
             return new ApplicationDbContext();
         }
+        public DbSet<Notificacion> Notificaciones { get; set; }
+    }
+    public class Notificacion
+    {
+        [Key]
+        public Guid Id { get; set; }
+        public TipoNotificacion Tipo { get; set; }
+        public string Descripcion { get; set; }
+        public string Url { get; set; }
+        public DateTime FechaCreacion { get; set; }
+        public bool Seen { get; set; }
+    }
+    //Serviran para mostrar un color con bootstrap
+    public enum TipoNotificacion
+    {
+        info, success, warning, danger, question
     }
 }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
+using WebSocket.Models;
 
 namespace WebSocket.Sockets
 {
@@ -24,5 +26,9 @@ namespace WebSocket.Sockets
         public SocketHub() : this(SocketTask.Instance) { }
         public SocketHub(SocketTask instance) => this._socketTask = instance;
 
+        public async Task<List<Notificacion>> GetNotificaciones(bool transact)
+        {
+            return await this._socketTask.GetNotificaciones(transact);
+        }
     }
 }
